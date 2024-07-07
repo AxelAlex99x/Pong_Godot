@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dp6en6g6ks0vc"
-path="res://.godot/imported/ballo.png-fd1adab4993bfef9e4cd966515629b37.ctex"
+uid="uid://8yk7sggm835k"
+path="res://.godot/imported/enemyPaddle.png-083e65f2c23a2e9c1c699e2bceb398ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ballo.png"
-dest_files=["res://.godot/imported/ballo.png-fd1adab4993bfef9e4cd966515629b37.ctex"]
+source_file="res://assets/enemyPaddle.png"
+dest_files=["res://.godot/imported/enemyPaddle.png-083e65f2c23a2e9c1c699e2bceb398ce.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

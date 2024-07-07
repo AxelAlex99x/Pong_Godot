@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://wtsjvbvaiobi"]
+
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_rnv6o"]
+[ext_resource type="Texture2D" uid="uid://bnguf2qnm4kdh" path="res://assets/Board.png" id="2_u73lq"]
+[ext_resource type="Texture2D" uid="uid://c5lnlcnh11s3" path="res://assets/Separator.png" id="3_jfnqp"]
+[ext_resource type="PackedScene" uid="uid://c0jmg87j7383a" path="res://scenes/paddle.tscn" id="4_7vfu5"]
+[ext_resource type="Texture2D" uid="uid://8yk7sggm835k" path="res://assets/enemyPaddle.png" id="5_c3srd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ey05u"]
+font_size = 38
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_rnv6o")
+
+[node name="Graphics" type="Node" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Graphics"]
+offset_right = 1024.0
+offset_bottom = 576.0
+texture = ExtResource("2_u73lq")
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics"]
+position = Vector2(512, 288)
+texture = ExtResource("3_jfnqp")
+
+[node name="Score" type="Label" parent="Graphics"]
+offset_left = 484.0
+offset_right = 540.0
+offset_bottom = 53.0
+size_flags_horizontal = 4
+text = "0-0"
+label_settings = SubResource("LabelSettings_ey05u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BallContainer" type="Node" parent="."]
+
+[node name="BallSpawnLocation" type="Marker2D" parent="BallContainer"]
+position = Vector2(512, 288)
+
+[node name="PaddleContainer" type="Node" parent="."]
+
+[node name="Paddle" parent="PaddleContainer" instance=ExtResource("4_7vfu5")]
+position = Vector2(35, 288)
+
+[node name="Paddle2" parent="PaddleContainer" instance=ExtResource("4_7vfu5")]
+position = Vector2(989, 288)
+rotation = 3.14159
+paddle_location = 1
+
+[node name="Sprite2D" parent="PaddleContainer/Paddle2" index="0"]
+texture = ExtResource("5_c3srd")
+
+[editable path="PaddleContainer/Paddle2"]

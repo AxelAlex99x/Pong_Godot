@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jg18fvqiww3b"
-path="res://.godot/imported/ball effect_53x51.png-e943b0406c355da6bc6ac864e9f79430.ctex"
+uid="uid://bnguf2qnm4kdh"
+path="res://.godot/imported/Board.png-fa42e4fabb250b1654d258e7c50d4ef3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/balleffects2/ball effect_53x51.png"
-dest_files=["res://.godot/imported/ball effect_53x51.png-e943b0406c355da6bc6ac864e9f79430.ctex"]
+source_file="res://assets/Board.png"
+dest_files=["res://.godot/imported/Board.png-fa42e4fabb250b1654d258e7c50d4ef3.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
