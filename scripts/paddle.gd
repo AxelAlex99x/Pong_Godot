@@ -28,3 +28,9 @@ func _physics_process(delta):
 	if Input.is_action_pressed(input_name + "move_down"):
 		global_position.y += speed * delta
 	global_position.y = clamp(global_position.y,margin,576-margin)
+
+
+func _on_area_entered(area):
+	if area.name == "Ball":
+		area.direction.x *= -1
+		area.direction.y = (area.global_position.y - global_position.y)/60

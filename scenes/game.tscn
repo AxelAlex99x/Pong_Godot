@@ -1,15 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://wtsjvbvaiobi"]
+[gd_scene load_steps=9 format=3 uid="uid://wtsjvbvaiobi"]
 
-[ext_resource type="Script" path="res://scenes/game.gd" id="1_rnv6o"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_rnv6o"]
 [ext_resource type="Texture2D" uid="uid://bnguf2qnm4kdh" path="res://assets/Board.png" id="2_u73lq"]
 [ext_resource type="Texture2D" uid="uid://c5lnlcnh11s3" path="res://assets/Separator.png" id="3_jfnqp"]
 [ext_resource type="PackedScene" uid="uid://c0jmg87j7383a" path="res://scenes/paddle.tscn" id="4_7vfu5"]
 [ext_resource type="Texture2D" uid="uid://8yk7sggm835k" path="res://assets/enemyPaddle.png" id="5_c3srd"]
+[ext_resource type="PackedScene" uid="uid://bxugtsdo7qhba" path="res://scenes/wall.tscn" id="6_6jhrv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ey05u"]
 font_size = 38
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7iiul"]
+size = Vector2(576, 20)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_rnv6o")
@@ -53,4 +57,33 @@ paddle_location = 1
 [node name="Sprite2D" parent="PaddleContainer/Paddle2" index="0"]
 texture = ExtResource("5_c3srd")
 
+[node name="WallContainer" type="Node" parent="."]
+
+[node name="Ceiling" parent="WallContainer" instance=ExtResource("6_6jhrv")]
+position = Vector2(512, -10)
+bouncy = true
+
+[node name="Floor" parent="WallContainer" instance=ExtResource("6_6jhrv")]
+position = Vector2(512, 586)
+bouncy = true
+
+[node name="LeftWall" parent="WallContainer" instance=ExtResource("6_6jhrv")]
+position = Vector2(-10, 288)
+rotation = 1.5708
+
+[node name="CollisionShape2D" parent="WallContainer/LeftWall" index="0"]
+shape = SubResource("RectangleShape2D_7iiul")
+
+[node name="RightWall" parent="WallContainer" instance=ExtResource("6_6jhrv")]
+position = Vector2(1034, 288)
+rotation = 1.5708
+
+[node name="CollisionShape2D" parent="WallContainer/RightWall" index="0"]
+shape = SubResource("RectangleShape2D_7iiul")
+
+[connection signal="ball_out" from="WallContainer/LeftWall" to="." method="_on_ball_out"]
+[connection signal="ball_out" from="WallContainer/RightWall" to="." method="_on_ball_out"]
+
 [editable path="PaddleContainer/Paddle2"]
+[editable path="WallContainer/LeftWall"]
+[editable path="WallContainer/RightWall"]
