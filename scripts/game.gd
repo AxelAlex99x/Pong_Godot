@@ -4,16 +4,33 @@ var Ball = preload("res://scenes/ball.tscn")
 
 @onready var ballContainer = $BallContainer
 @onready var ballSpawnLocation = $BallContainer/BallSpawnLocation
-# Called when the node enters the scene tree for the first time.
+@onready var reset_timer = $ResetTimer
+@onready var score_label = $Graphics/Score
+
+const win_number = 6
+var score = Vector2(0,0)
+
 func _ready():
+	reset_ball()
+
+func _on_ball_out(wall_name):
+	match wall_name:
+		"LeftWall":
+			score.y += 1
+		"RightWall":
+			score.x += 1
+	update_score()
+	if score.x >= win_number || score.y >= win_number:
+		game_over()
+	reset_timer.start() 
+
+func reset_ball():
 	var ball = Ball.instantiate()
 	ballContainer.add_child(ball)
 	ball.global_position = ballSpawnLocation.global_position
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func update_score():
+	score_label.text = str(score.x) + "-" + str(score.y)
 
-
-func _on_ball_out(wall_name):
-	pass # Replace with function body.
+func game_over():
+	get_tree().reload_current_scene()

@@ -18,10 +18,6 @@ func _ready():
 	if paddle_location == PaddleLocation.RIGHT:
 		input_name = "right_"
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func _physics_process(delta):
 	if Input.is_action_pressed(input_name + "move_up"):
 		global_position.y += -speed * delta
@@ -31,6 +27,6 @@ func _physics_process(delta):
 
 
 func _on_area_entered(area):
-	if area.name == "Ball":
+	if area is Ball:
 		area.direction.x *= -1
 		area.direction.y = (area.global_position.y - global_position.y)/60
