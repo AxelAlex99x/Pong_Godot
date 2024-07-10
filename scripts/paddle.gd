@@ -37,7 +37,7 @@ func player_move(delta):
 	global_position.y = clamp(global_position.y,margin,576-margin)
 
 func ai_move(delta):
-	var ball = get_node("/root/Game/BallContainer/Ball")
+	var ball = get_node_or_null("/root/Game/BallContainer/Ball")
 	if ball != null:
 		print("AI Playing")
 		global_position.y = move_toward(global_position.y, ball.global_position.y, ai_speed * delta)
