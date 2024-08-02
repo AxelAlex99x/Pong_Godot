@@ -53,3 +53,4 @@ func _on_area_entered(area):
 	if area is Ball:
 		area.direction.x *= -1
 		area.direction.y = (area.global_position.y - global_position.y)/60
+		area.on_collision()
