@@ -11,14 +11,17 @@ var Ball = preload("res://scenes/ball.tscn")
 @onready var r_paddle = $PaddleContainer/Paddle2
 @onready var countdown = $CountdownContainer/Countdown
 @onready var countdown_label = $CountdownContainer/CountdownLabel
+@onready var winner_label = $GameOverContainer/VBoxContainer/WinnerText
+@onready var gameover_cont = $GameOverContainer/VBoxContainer
 
-
-const win_number = 6
+const win_number = 1
 var score = Vector2(0,0)
 var countdown_sec = 3
 var game_active = false 
 
 func _ready():
+	gameover_cont.visible = false
+	gameover_cont.process_mode = Node.PROCESS_MODE_ALWAYS
 	start_countdown()
 	print(Global.playing_AI)
 	if Global.playing_AI:
@@ -46,14 +49,16 @@ func update_score():
 	score_label.text = str(score.x) + "-" + str(score.y)
 
 func game_over():
-	get_tree().reload_current_scene()
+	freeze_game()
+	display_winner()
+	gameover_cont.visible = true
+	#get_tree().reload_current_scene()
 
 func start_countdown():
 	game_active = false
 	freeze_game()
 	countdown_label.text = str(countdown_sec)
 	countdown_label.show()
-	
 	countdown.start()
 
 
@@ -74,3 +79,16 @@ func freeze_game():
 	get_tree().paused = true
 func unfreeze_game():
 	get_tree().paused = false
+
+func display_winner():
+	var winner = "Player 1 Wins!" if score.x >= win_number else Global.second_player_win_lb
+	winner_label.text = winner
+
+
+func _on_play_again_pressed():
+	get_tree().reload_current_scene()
+
+
+func _on_go_back_to_menu_pressed():
+	unfreeze_game()
+	get_tree().change_scene_to_file("res://scenes/game_menu.tscn")

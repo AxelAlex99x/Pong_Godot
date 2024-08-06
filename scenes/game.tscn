@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://wtsjvbvaiobi"]
+[gd_scene load_steps=11 format=3 uid="uid://wtsjvbvaiobi"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_rnv6o"]
 [ext_resource type="Texture2D" uid="uid://bnguf2qnm4kdh" path="res://assets/Board.png" id="2_u73lq"]
@@ -18,6 +18,9 @@ size = Vector2(576, 20)
 [sub_resource type="LabelSettings" id="LabelSettings_4p476"]
 font_size = 48
 outline_size = 6
+
+[sub_resource type="LabelSettings" id="LabelSettings_nt08a"]
+font_size = 64
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_rnv6o")
@@ -95,6 +98,7 @@ process_mode = 3
 [node name="Countdown" type="Timer" parent="CountdownContainer"]
 
 [node name="CountdownLabel" type="Label" parent="CountdownContainer"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -109,10 +113,47 @@ grow_vertical = 2
 text = "Lala"
 label_settings = SubResource("LabelSettings_4p476")
 
+[node name="GameOverContainer" type="Node" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.5
+offset_top = -61.5
+offset_right = 106.5
+offset_bottom = 61.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WinnerText" type="Label" parent="GameOverContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Lala"
+label_settings = SubResource("LabelSettings_nt08a")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOverContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PlayAgain" type="Button" parent="GameOverContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Play again?"
+
+[node name="GoBackToMenu" type="Button" parent="GameOverContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Back to menu"
+
 [connection signal="ball_out" from="WallContainer/LeftWall" to="." method="_on_ball_out"]
 [connection signal="ball_out" from="WallContainer/RightWall" to="." method="_on_ball_out"]
 [connection signal="timeout" from="ResetTimer" to="." method="reset_ball"]
 [connection signal="timeout" from="CountdownContainer/Countdown" to="." method="_on_countdown_timeout"]
+[connection signal="pressed" from="GameOverContainer/VBoxContainer/HBoxContainer/PlayAgain" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="GameOverContainer/VBoxContainer/HBoxContainer/GoBackToMenu" to="." method="_on_go_back_to_menu_pressed"]
 
 [editable path="PaddleContainer/Paddle2"]
 [editable path="WallContainer/LeftWall"]
